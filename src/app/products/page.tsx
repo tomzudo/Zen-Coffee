@@ -26,7 +26,7 @@ const CreateProduct = () => {
           name,
           description,
           price: parseFloat(price),
-          status,  // Incluindo o status
+          status: 'ACTIVE',  // Incluindo o status
         }),
       });
 

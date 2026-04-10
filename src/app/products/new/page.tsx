@@ -27,6 +27,7 @@ const CreateProduct = () => {
           name,
           description,
           price: parseFloat(price),
+          status: 'ACTIVE',
         }),
       });
 
@@ -48,10 +49,10 @@ const CreateProduct = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-semibold">Criar Produto</h1>
+      <h1 className="text-2xl font-semibold">Criar Produgeddsvvdsfto</h1>
       <form onSubmit={handleSubmit} className="mt-4 space-y-4">
         <div>
-          <label className="block">Nome</label>
+          <label className="block">Nofgefgrme</label>
           <input
             type="text"
             className="w-full p-2 border rounded"
