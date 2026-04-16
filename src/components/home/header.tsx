@@ -1,29 +1,16 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 
 const Header = () => {
   return (
     <header className="w-full bg-black text-white border-b border-white/10">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-        {/* LOGO / NOME */}
-        <div className="flex items-center gap-3">
-          <div className="h-20 w-20 rounded-full overflow-hidden">
-            <Image 
-              src="/monkeylogo.jpg" 
-              alt="avatar" 
-              width={40}
-              height={40}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div>
-            <h1 className="text-lg font-bold tracking-wide uppercase">
-              Macaco Store
-            </h1>
-            <p className="text-xs text-zinc-400">Streetwear oldschool</p>
-          </div>
+        <div>
+          <h1 className="text-lg font-bold tracking-wide uppercase text-yellow-500">
+            Macaco Store
+          </h1>
+          <p className="text-xs text-zinc-400">Streetwear oldschool</p>
         </div>
 
         {/* MENU DESKTOP */}

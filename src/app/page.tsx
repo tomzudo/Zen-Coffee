@@ -1,22 +1,11 @@
 import Header from '@/components/home/header';
 import Footer from '@/components/home/Footer';
 import ProductCard from '@/components/ProductCard';
-import Image from 'next/image';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-primary text-textMain">
       <Header />
-
-      {/* HERO */}
-      <section className="relative flex items-center py-70">
-        <div>
-          <Image src="/mikementze.jpeg" 
-                alt="avatar"
-                fill
-                className="w-full h-full object-cover" />
-        </div>
-      </section>
 
       {/* PRODUTOS */}
       <section className="bg-[#F2F2E0] py-20">
