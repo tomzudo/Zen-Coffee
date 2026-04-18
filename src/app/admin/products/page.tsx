@@ -17,7 +17,15 @@ export default function ProductsAdmin() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch('/api/products');
+      const res = await fetch('/api/products', {
+        credentials: 'include',
+      });
+
+      if (res.status === 401) {
+        router.push('/login');
+        return;
+      }
+
       const data = await res.json();
       setProducts(data);
     } catch {
@@ -33,7 +41,16 @@ export default function ProductsAdmin() {
     if (!confirm('Deseja excluir?')) return;
 
     try {
-      await fetch(`/api/products/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/products/${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+
+      if (res.status === 401) {
+        router.push('/login');
+        return;
+      }
+
       toast.success('Produto excluído');
       fetchProducts();
     } catch {
