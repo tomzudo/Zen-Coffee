@@ -21,7 +21,7 @@ const ProductCard = ({ name, price, image }: ProductCardProps) => {
 
       {/* INFO */}
       <div className="mt-4">
-        <h3 className="text-lg font-semibold text-black">
+        <h3 className="text-lg font-semibold text-black text-montserrat">
           {name}
         </h3>
 
@@ -30,11 +30,11 @@ const ProductCard = ({ name, price, image }: ProductCardProps) => {
         </p>
 
         <div className="mt-2 flex items-center justify-between">
-          <span className="text-xl font-bold text-black">
+          <span className="text-xl font-weight:normal text-red-500">
             R$ {price.toFixed(2)}
           </span>
 
-          <button className="rounded-full bg-black px-4 py-2 text-sm text-white hover:bg-zinc-800 transition">
+          <button className="rounded-full bg-black px-4 py-2 text-sm text-white text-montserrat hover:bg-zinc-800 transition">
             Comprar
           </button>
         </div>

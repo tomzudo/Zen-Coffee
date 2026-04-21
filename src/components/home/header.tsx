@@ -7,14 +7,16 @@ const Header = () => {
     <header className="w-full bg-black text-white border-b border-white/10">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <div>
-          <h1 className="text-lg font-bold tracking-wide uppercase text-yellow-500">
+          <h1 className="text-lg font-bold tracking-wide uppercase text-yellow-500 text-montserrat">
             Macaco Store
           </h1>
-          <p className="text-xs text-zinc-400">Streetwear oldschool</p>
+          <p className="text-xs text-zinc-400 text-montserrat">
+            Streetwear oldschool
+          </p>
         </div>
 
         {/* MENU DESKTOP */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-montserrat">
           <a href="#" className="transition hover:text-zinc-300">
             Início
           </a>

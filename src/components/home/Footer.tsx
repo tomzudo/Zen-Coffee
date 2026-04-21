@@ -45,7 +45,7 @@ const Footer = () => {
         </div>
 
         {/* LINHA FINAL */}
-        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-zinc-500">
+        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-zinc-500 text-montserrat">
           © {new Date().getFullYear()} Macaco Store. Todos os direitos reservados.
         </div>
 
