@@ -1,4 +1,4 @@
-import prisma from './lib/prisma';  // Usando import ao invés de require
+import prisma from './lib/prisma';
 
 async function createProduct() {
     try {
@@ -14,7 +14,7 @@ async function createProduct() {
     } catch (error) {
         console.error('Erro ao criar produto:', error);
     } finally {
-        await prisma.$disconnect();  // Fechar a conexão com o banco
+        await prisma.$disconnect();  
     }
 }
 

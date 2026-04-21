@@ -7,7 +7,6 @@ const Footer = () => {
         
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           
-          {/* MARCA */}
           <div>
             <h2 className="text-xl font-bold uppercase tracking-wide">
               Zen Coffee
@@ -17,7 +16,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* LINKS */}
           <div>
             <h3 className="mb-3 text-sm font-semibold uppercase text-zinc-300">
               Navegação
@@ -30,7 +28,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* SOCIAL */}
           <div>
             <h3 className="mb-3 text-sm font-semibold uppercase text-zinc-300">
               Redes
@@ -44,7 +41,6 @@ const Footer = () => {
 
         </div>
 
-        {/* LINHA FINAL */}
         <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-zinc-500 text-montserrat">
           © {new Date().getFullYear()} Zen Coffee. Todos os direitos reservados.
         </div>

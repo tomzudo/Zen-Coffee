@@ -13,7 +13,7 @@ async function createProduct() {
   } catch (error) {
     console.error('Erro ao criar produto:', error);
   } finally {
-    await prisma.$disconnect(); // Fechar a conexão com o banco
+    await prisma.$disconnect(); 
   }
 }
 

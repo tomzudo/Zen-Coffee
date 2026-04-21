@@ -7,7 +7,6 @@ export default function Home() {
     <div className="min-h-screen bg-primary text-textMain">
       <Header />
 
-      {/* PRODUTOS */}
       <section className="bg-[#F2F2E0] py-10">
         
         <div className="mx-auto max-w-7xl px-6">

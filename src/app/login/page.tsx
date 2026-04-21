@@ -13,7 +13,6 @@ export default function LoginPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 🔐 LOGIN SIMPLES (troca depois se quiser)
     if (email === 'tom' && password === 'TOMASturbano') {
       document.cookie = 'admin=true; path=/;';
 

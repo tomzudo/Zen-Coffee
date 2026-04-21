@@ -12,7 +12,6 @@ const ProductCard = ({ name, price, image }: ProductCardProps) => {
       backdrop-blur-md 
       p-4 transition-all duration-300">
       
-      {/* IMAGEM */}
       <div className="overflow-hidden rounded-xl">
         <img
           src={image}
@@ -21,7 +20,6 @@ const ProductCard = ({ name, price, image }: ProductCardProps) => {
         />
       </div>
 
-      {/* INFO */}
       <div className="mt-4">
         <h3 className="text-lg font-semibold text-black">
           {name}

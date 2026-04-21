@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@lib/prisma";
 
-// Função para pegar um erro de forma amigável
 function getErrorMessage(error: unknown) {
   if (error instanceof Error) {
     return error.message;
@@ -9,7 +8,6 @@ function getErrorMessage(error: unknown) {
   return "Erro desconhecido";
 }
 
-// GET - Buscar produto por ID
 export async function GET(request: NextRequest, context: { params: { id: string } }) {
   const { id } = await context.params;
   const parsedId = parseInt(id);
@@ -35,7 +33,6 @@ export async function GET(request: NextRequest, context: { params: { id: string 
   }
 }
 
-// PUT - Atualizar produto por ID
 export async function PUT(request: NextRequest, context: { params: { id: string } }) {
   const { id } = await context.params;
   const parsedId = parseInt(id);
@@ -68,7 +65,6 @@ export async function PUT(request: NextRequest, context: { params: { id: string 
   }
 }
 
-// DELETE - Deletar produto por ID
 export async function DELETE(request: NextRequest, context: { params: { id: string } }) {
   const { id } = await context.params;
   const parsedId = parseInt(id);
@@ -78,12 +74,11 @@ export async function DELETE(request: NextRequest, context: { params: { id: stri
   }
 
   try {
-    // Deleta primeiro os itens relacionados
+  
     await prisma.orderItem.deleteMany({
       where: { productId: parsedId },
     });
 
-    // Depois deleta o produto
     const deletedProduct = await prisma.product.delete({
       where: { id: parsedId },
     });

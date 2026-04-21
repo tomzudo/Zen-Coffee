@@ -1,5 +1,4 @@
-// src/app/products/page.tsx
-'use client'; // Diretiva para tratar o componente como cliente
+'use client'; 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import React from "react";
@@ -8,7 +7,7 @@ interface Product {
   name: string;
   description: string;
   price: number;
-  status: string; // Incluído para exibir status 
+  status: string;
 }
 
 const ProductsPage = () => {

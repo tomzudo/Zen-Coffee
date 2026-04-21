@@ -1,4 +1,3 @@
-// src/utils/validate.ts
 import { ProductInput } from "../types/product";
 
 export function validateProductInput(data: ProductInput) {

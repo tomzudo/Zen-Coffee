@@ -1,7 +1,4 @@
-// src/app/orders/[id]/page.tsx
-
-'use client'; // Diretiva para garantir que o componente seja de cliente
-
+'use client';
 import { useEffect, useState } from 'react';
 import React from "react";
 
@@ -13,12 +10,11 @@ interface OrderDetail {
 }
 
 const OrderDetailPage = ({ params }: { params: { id: string } }) => { 
-  const { id } = params; // Acessando o 'id' da URL através de 'params'
+  const { id } = params;
   const [order, setOrder] = useState<OrderDetail | null>(null);
 
   useEffect(() => {
-    if (!id) return;  // Se o ID não estiver disponível, não faz a requisição
-
+    if (!id) return;  
     const fetchOrder = async () => {
       const res = await fetch(`/api/orders/${id}`);
       const data = await res.json();
@@ -26,8 +22,7 @@ const OrderDetailPage = ({ params }: { params: { id: string } }) => {
     };
 
     fetchOrder();
-  }, [id]);  // A dependência é o 'id'
-
+  }, [id]); 
   if (!order) return <div>Carregando...</div>;
 
   return (

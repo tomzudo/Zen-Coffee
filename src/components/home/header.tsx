@@ -6,21 +6,16 @@ const Header = () => {
   return (
     <header className="w-full bg-white text-black border-b border-zinc-200">
       
-      {/* TOP BAR */}
       <div className="w-full bg-zinc-900 text-white text-xs text-center py-2">
         Cuidado com golpes! Esse é nosso site oficial ☕
       </div>
 
-      {/* CONTEÚDO PRINCIPAL */}
       <div className="mx-auto max-w-7xl px-6 py-6">
         
-        {/* LINHA 1 */}
         <div className="flex items-center justify-between">
           
-          {/* ESQUERDA (vazio pra centralizar logo) */}
           <div className="w-32" />
 
-          {/* LOGO CENTRAL */}
           <div className="text-center">
             <h1 className="text-2xl tracking-[0.3em] font-semibold">
               ZEN
@@ -30,7 +25,6 @@ const Header = () => {
             </p>
           </div>
 
-          {/* DIREITA */}
           <div className="flex items-center gap-6 text-sm">
             <button className="hover:text-zinc-500 transition">
               Entrar
@@ -44,7 +38,6 @@ const Header = () => {
           </div>
         </div>
 
-        {/* MENU */}
         <nav className="mt-6 flex items-center justify-center gap-10 text-sm tracking-wide">
           <a href="#" className="hover:text-zinc-500 transition">
             CAFÉ EM CÁPSULA

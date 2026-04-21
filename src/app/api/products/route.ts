@@ -1,13 +1,11 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@lib/prisma';
 
-// 🔐 VERIFICA ADMIN DIRETO PELO HEADER
 function isAdmin(req: Request) {
   const cookie = req.headers.get('cookie') || '';
   return cookie.includes('admin=true');
 }
 
-// POST (criar produto)
 export async function POST(request: Request) {
   if (!isAdmin(request)) {
     return new Response('Unauthorized', { status: 401 });
@@ -40,7 +38,6 @@ export async function POST(request: Request) {
   }
 }
 
-// GET (listar produtos)
 export async function GET(request: Request) {
   if (!isAdmin(request)) {
     return new Response('Unauthorized', { status: 401 });
@@ -60,7 +57,6 @@ export async function GET(request: Request) {
   }
 }
 
-// PUT (atualizar)
 export async function PUT(request: Request) {
   if (!isAdmin(request)) {
     return new Response('Unauthorized', { status: 401 });
@@ -92,7 +88,6 @@ export async function PUT(request: Request) {
   }
 }
 
-// DELETE (remover)
 export async function DELETE(request: Request) {
   if (!isAdmin(request)) {
     return new Response('Unauthorized', { status: 401 });
