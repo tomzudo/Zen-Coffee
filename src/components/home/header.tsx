@@ -7,20 +7,20 @@ const Header = () => {
     <header className="w-full bg-white text-black border-b border-zinc-200">
       
       <div className="w-full bg-zinc-900 text-white text-xs text-center py-2">
-        Cuidado com golpes! Esse é nosso site oficial ☕
+        Qualidade, sabor e aroma incomparáveis para os amantes de café.
       </div>
 
       <div className="mx-auto max-w-7xl px-6 py-6">
         
         <div className="flex items-center justify-between">
           
-          <div className="w-32" />
+          <div className="w-50" />
 
-          <div className="text-center">
-            <h1 className="text-2xl tracking-[0.3em] font-semibold">
+          <div className="text-justify-center">
+            <h1 className="text-2xl tracking-[0.3em] font-semibold text-center">
               ZEN
             </h1>
-            <p className="text-xs tracking-[0.4em] text-zinc-500">
+            <p className="text-xs tracking-[0.4em] text-zinc-500 text-justify-center">
               COFFEE
             </p>
           </div>
