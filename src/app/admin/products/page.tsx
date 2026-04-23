@@ -1,14 +1,15 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 interface Product {
-  id: number;
+  id: string; // ✔ Prisma usa string (cuid)
   name: string;
   description: string;
   price: number;
+  status?: string;
 }
 
 export default function ProductsAdmin() {
@@ -21,9 +22,12 @@ export default function ProductsAdmin() {
         credentials: 'include',
       });
 
-      if (res.status === 401) {
-        router.push('/login');
-        return;
+      if (!res.ok) {
+        if (res.status === 401) {
+          router.push('/login');
+          return;
+        }
+        throw new Error('Failed to fetch');
       }
 
       const data = await res.json();
@@ -37,18 +41,21 @@ export default function ProductsAdmin() {
     fetchProducts();
   }, []);
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     if (!confirm('Deseja excluir?')) return;
 
     try {
-      const res = await fetch(`/api/products/${id}`, {
+      const res = await fetch(`/api/products?id=${id}`, {
         method: 'DELETE',
         credentials: 'include',
       });
 
-      if (res.status === 401) {
-        router.push('/login');
-        return;
+      if (!res.ok) {
+        if (res.status === 401) {
+          router.push('/login');
+          return;
+        }
+        throw new Error();
       }
 
       toast.success('Produto excluído');
@@ -106,4 +113,4 @@ export default function ProductsAdmin() {
       </div>
     </div>
   );
-} 
+}

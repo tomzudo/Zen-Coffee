@@ -1,115 +1,146 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@lib/prisma';
+import { prisma } from '@/lib/prisma';
+import { requireAuth } from '@/lib/auth';
 
-function isAdmin(req: Request) {
-  const cookie = req.headers.get('cookie') || '';
-  return cookie.includes('admin=true');
+function unauthorized() {
+  return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
 }
 
-export async function POST(request: Request) {
-  if (!isAdmin(request)) {
-    return new Response('Unauthorized', { status: 401 });
-  }
+function handleError(error: unknown) {
+  console.error(error);
 
+  return NextResponse.json(
+    {
+      message:
+        error instanceof Error ? error.message : 'Internal server error',
+    },
+    { status: 500 }
+  );
+}
+
+// 📦 CREATE
+export async function POST(request: Request) {
   try {
+    await requireAuth();
+
     const { name, description, price, status } = await request.json();
 
-    if (!name || !description || !price || !status) {
-      return NextResponse.json({ message: 'Missing fields' }, { status: 400 });
+    if (!name || !description || price == null || !status) {
+      return NextResponse.json(
+        { message: 'Missing fields' },
+        { status: 400 }
+      );
     }
 
-    const newProduct = await prisma.product.create({
+    const product = await prisma.product.create({
       data: {
         name,
         description,
-        price,
+        price: Number(price),
         status,
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
     });
 
-    return NextResponse.json(newProduct, { status: 201 });
+    return NextResponse.json(product, { status: 201 });
   } catch (error: unknown) {
-    return NextResponse.json(
-      { message: error instanceof Error ? error.message : 'Internal server error' },
-      { status: 500 }
-    );
+    if (error instanceof Error && error.message === 'Unauthorized') {
+      return unauthorized();
+    }
+
+    return handleError(error);
   }
 }
- 
-export async function GET(request: Request) {
-  if (!isAdmin(request)) {
-    return new Response('Unauthorized', { status: 401 });
-  }
 
+// 📦 READ
+export async function GET() {
   try {
+    await requireAuth();
+
     const products = await prisma.product.findMany({
       orderBy: { createdAt: 'desc' },
     });
 
-    return NextResponse.json(products, { status: 200 });
+    return NextResponse.json(products);
   } catch (error: unknown) {
-    return NextResponse.json(
-      { message: error instanceof Error ? error.message : 'Internal server error' },
-      { status: 500 }
-    );
+    if (error instanceof Error && error.message === 'Unauthorized') {
+      return unauthorized();
+    }
+
+    return handleError(error);
   }
 }
 
+// 📦 UPDATE
 export async function PUT(request: Request) {
-  if (!isAdmin(request)) {
-    return new Response('Unauthorized', { status: 401 });
-  }
-
   try {
-    const { id, name, description, price } = await request.json();
+    await requireAuth();
 
-    if (!id || !name || !description || !price) {
-      return NextResponse.json({ message: 'Missing fields' }, { status: 400 });
+    const { id, name, description, price, status } = await request.json();
+
+    if (!id || !name || !description || price == null) {
+      return NextResponse.json(
+        { message: 'Missing fields' },
+        { status: 400 }
+      );
     }
 
-    const updatedProduct = await prisma.product.update({
+    const product = await prisma.product.update({
       where: { id },
       data: {
         name,
         description,
-        price,
-        updatedAt: new Date(),
+        price: Number(price),
+        status,
       },
     });
 
-    return NextResponse.json(updatedProduct, { status: 200 });
+    return NextResponse.json(product);
   } catch (error: unknown) {
-    return NextResponse.json(
-      { message: error instanceof Error ? error.message : 'Internal server error' },
-      { status: 500 }
-    );
+    if (error instanceof Error && error.message === 'Unauthorized') {
+      return unauthorized();
+    }
+
+    return handleError(error);
   }
 }
 
+// 📦 DELETE
 export async function DELETE(request: Request) {
-  if (!isAdmin(request)) {
-    return new Response('Unauthorized', { status: 401 });
-  }
-
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get('id');
-
-  if (!id) {
-    return NextResponse.json({ message: 'Product ID is required' }, { status: 400 });
-  }
-
   try {
-    const deletedProduct = await prisma.product.delete({
-      where: { id: Number(id) },
+    await requireAuth();
+
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json(
+        { message: 'Missing id' },
+        { status: 400 }
+      );
+    }
+
+    const product = await prisma.product.delete({
+      where: { id },
     });
 
-    return NextResponse.json(deletedProduct, { status: 200 });
+    return NextResponse.json(product);
   } catch (error: unknown) {
-    return NextResponse.json(
-      { message: error instanceof Error ? error.message : 'Product not found' },
-      { status: 404 }
-    );
+    if (error instanceof Error && error.message === 'Unauthorized') {
+      return unauthorized();
+    }
+
+    // Prisma: registro não encontrado
+    if (typeof error === 'object' && error !== null && 'code' in error) {
+      const err = error as { code?: string };
+
+      if (err.code === 'P2025') {
+        return NextResponse.json(
+          { message: 'Product not found' },
+          { status: 404 }
+        );
+      }
+    }
+
+    return handleError(error);
   }
 }

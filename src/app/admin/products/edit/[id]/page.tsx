@@ -1,17 +1,18 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 interface Product {
-  id: number;
+  id: string; // 🔥 corrigido (Prisma usa string)
   name: string;
   description: string;
   price: number;
+  status: string;
 }
 
-const EditProduct = () => {
+export default function EditProduct() {
   const router = useRouter();
   const params = useParams();
   const id = params?.id as string;
@@ -25,13 +26,19 @@ const EditProduct = () => {
     const fetchProduct = async () => {
       try {
         const res = await fetch(`/api/products/${id}`, {
-          credentials: 'include',
+          credentials: 'include', // 🔐 importante
         });
-        
+
+        if (res.status === 401) {
+          router.push('/login');
+          return;
+        }
+
         if (!res.ok) throw new Error();
 
         const data = await res.json();
         setProduct(data);
+
       } catch {
         setProduct(null);
       } finally {
@@ -45,22 +52,29 @@ const EditProduct = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!product || !product.price) {
+    if (!product || !product.name || !product.price) {
       return toast.error('Dados inválidos');
     }
 
     try {
-      const res = await fetch(`/api/products/${product.id}`, {
+      const res = await fetch('/api/products', { // 🔥 padrão do seu backend
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // 🔐 importante
         body: JSON.stringify(product),
       });
+
+      if (res.status === 401) {
+        router.push('/login');
+        return;
+      }
 
       if (!res.ok) throw new Error();
 
       toast.success('Produto atualizado!');
       router.push('/admin/products');
       router.refresh();
+
     } catch {
       toast.error('Erro ao atualizar produto');
     }
@@ -77,7 +91,9 @@ const EditProduct = () => {
         <input
           type="text"
           value={product.name}
-          onChange={(e) => setProduct({ ...product, name: e.target.value })}
+          onChange={(e) =>
+            setProduct({ ...product, name: e.target.value })
+          }
           className="w-full p-2 border rounded"
           placeholder="Nome"
         />
@@ -102,11 +118,21 @@ const EditProduct = () => {
           placeholder="Preço"
         />
 
+        <select
+          value={product.status}
+          onChange={(e) =>
+            setProduct({ ...product, status: e.target.value })
+          }
+          className="w-full p-2 border rounded"
+        >
+          <option value="active">Ativo</option>
+          <option value="inactive">Inativo</option>
+        </select>
+
         <button className="bg-black text-white px-6 py-2 rounded">
           Salvar
         </button>
       </form>
     </div>
   );
-};
-export default EditProduct;
+}

@@ -22,7 +22,7 @@ const CreateProduct = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('/admin/products', {
+      const res = await fetch('/api/products', { // ✅ CORRIGIDO
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -34,7 +34,13 @@ const CreateProduct = () => {
         }),
       });
 
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        if (res.status === 401) {
+          router.push('/login');
+          return;
+        }
+        throw new Error();
+      }
 
       toast.success('Produto criado!');
       router.push('/admin/products');
@@ -44,7 +50,7 @@ const CreateProduct = () => {
       setLoading(false);
     }
   };
- 
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold">Criar Produto</h1>

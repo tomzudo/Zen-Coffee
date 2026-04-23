@@ -1,11 +1,15 @@
 'use client';
 
-import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-const Header = () => {
+export default function Header() {
+  const router = useRouter();
+
   return (
     <header className="w-full bg-white text-black border-b border-zinc-200">
       
+      {/* Top bar */}
       <div className="w-full bg-zinc-900 text-white text-xs text-center py-2">
         Qualidade, sabor e aroma incomparáveis para os amantes de café.
       </div>
@@ -14,50 +18,67 @@ const Header = () => {
         
         <div className="flex items-center justify-between">
           
-          <div className="w-50" />
+          {/* Espaço esquerda */}
+          <div className="w-40" />
 
-          <div className="text-justify-center">
-            <h1 className="text-2xl tracking-[0.3em] font-semibold text-center">
-              ZEN
-            </h1>
-            <p className="text-xs tracking-[0.4em] text-zinc-500 text-justify-center">
-              COFFEE
-            </p>
+          {/* Logo */}
+          <div className="text-center">
+            <Link href="/">
+              <h1 className="text-2xl tracking-[0.3em] font-semibold">
+                ZEN
+              </h1>
+              <p className="text-xs tracking-[0.4em] text-zinc-500">
+                COFFEE
+              </p>
+            </Link>
           </div>
 
+          {/* Ações */}
           <div className="flex items-center gap-6 text-sm">
-            <button className="hover:text-zinc-500 transition">
+            
+            <button
+              onClick={() => router.push('/login')}
+              className="hover:text-zinc-500 transition"
+            >
               Entrar
             </button>
-            <button className="hover:text-zinc-500 transition">
-              Carrinho (0)
+
+            <button
+              onClick={() => router.push('/orders')}
+              className="hover:text-zinc-500 transition"
+            >
+              Pedidos
             </button>
-            <button className="hover:text-zinc-500 transition">
+
+            <button
+              onClick={() => alert('Busca em breve')}
+              className="hover:text-zinc-500 transition"
+            >
               Buscar
             </button>
           </div>
         </div>
 
+        {/* Navegação */}
         <nav className="mt-6 flex items-center justify-center gap-10 text-sm tracking-wide">
-          <a href="#" className="hover:text-zinc-500 transition">
+          <Link href="/#products" className="hover:text-zinc-500 transition">
             CAFÉ EM CÁPSULA
-          </a>
-          <a href="#" className="hover:text-zinc-500 transition">
+          </Link>
+          <Link href="/#products" className="hover:text-zinc-500 transition">
             CAFÉ MOÍDO E GRÃO
-          </a>
-          <a href="#" className="hover:text-zinc-500 transition">
+          </Link>
+          <Link href="/#products" className="hover:text-zinc-500 transition">
             KITS
-          </a>
-          <a href="#" className="hover:text-zinc-500 transition">
+          </Link>
+          <Link href="/#products" className="hover:text-zinc-500 transition">
             ASSINATURA
-          </a>
-          <a href="#" className="hover:text-zinc-500 transition">
+          </Link>
+          <Link href="/#products" className="hover:text-zinc-500 transition">
             ACESSÓRIOS
-          </a>
+          </Link>
         </nav>
 
       </div>
     </header>
   );
-};
-export default Header;
+}
