@@ -7,7 +7,6 @@ export default function Footer() {
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
 
-          {/* Branding */}
           <div>
             <h2 className="text-xl font-bold uppercase tracking-wide">
               Zen Coffee
@@ -17,7 +16,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Navegação */}
           <div>
             <h3 className="mb-3 text-sm font-semibold uppercase text-zinc-300">
               Navegação
@@ -46,7 +44,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Redes */}
           <div>
             <h3 className="mb-3 text-sm font-semibold uppercase text-zinc-300">
               Redes
@@ -83,7 +80,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Rodapé inferior */}
         <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-zinc-500">
           © {new Date().getFullYear()} Zen Coffee. Todos os direitos reservados.
         </div>

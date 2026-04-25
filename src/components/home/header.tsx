@@ -8,8 +8,7 @@ export default function Header() {
 
   return (
     <header className="w-full bg-white text-black border-b border-zinc-200">
-      
-      {/* Top bar */}
+
       <div className="w-full bg-zinc-900 text-white text-xs text-center py-2">
         Qualidade, sabor e aroma incomparáveis para os amantes de café.
       </div>
@@ -18,10 +17,8 @@ export default function Header() {
         
         <div className="flex items-center justify-between">
           
-          {/* Espaço esquerda */}
           <div className="w-40" />
 
-          {/* Logo */}
           <div className="text-center">
             <Link href="/">
               <h1 className="text-2xl tracking-[0.3em] font-semibold">
@@ -33,7 +30,6 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Ações */}
           <div className="flex items-center gap-6 text-sm">
             
             <button
@@ -59,7 +55,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Navegação */}
         <nav className="mt-6 flex items-center justify-center gap-10 text-sm tracking-wide">
           <Link href="/#products" className="hover:text-zinc-500 transition">
             CAFÉ EM CÁPSULA

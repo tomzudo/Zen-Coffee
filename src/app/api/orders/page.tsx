@@ -17,7 +17,7 @@ export default function OrdersPage() {
     const fetchOrders = async () => {
       try {
         const res = await fetch('/api/orders', {
-          credentials: 'include', // 🔐 sessão
+          credentials: 'include',
         });
 
         if (res.status === 401) {

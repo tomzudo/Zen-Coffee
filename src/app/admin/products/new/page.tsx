@@ -22,7 +22,7 @@ const CreateProduct = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/products', { // ✅ CORRIGIDO
+      const res = await fetch('/api/products', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

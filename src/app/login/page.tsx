@@ -30,7 +30,6 @@ export default function LoginPage() {
 
       toast.success('Login realizado!');
 
-      // 🔥 fluxo correto sem hack
       router.push('/admin/products');
       router.refresh();
 

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 interface Product {
-  id: string; // ✔ Prisma usa string (cuid)
+  id: string;
   name: string;
   description: string;
   price: number;

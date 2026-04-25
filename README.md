@@ -54,12 +54,12 @@ O objetivo principal do projeto não foi complexidade extrema, mas sim consolida
 
 ```bash
 zen-coffee/
-├── public/           # Imagens e assets
+├── public/       
 ├── src/
-│   ├── app/          # Rotas do Next.js
-│   ├── components/   # Componentes reutilizáveis
-│   ├── services/     # Comunicação com API
-│   └── styles/       # Estilização
+│   ├── app/     
+│   ├── components/
+│   ├── services/    
+│   └── styles/       
 ├── package.json
 └── README.md
 ```

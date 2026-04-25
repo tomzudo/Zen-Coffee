@@ -9,7 +9,6 @@ interface Item {
 
 export async function POST(request: Request) {
   try {
-    // 🔐 usuário vem da sessão (não do frontend)
     const session = await requireAuth();
 
     const { items }: { items: Item[] } = await request.json();
@@ -21,7 +20,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // 🔥 busca produtos reais no banco (NÃO confia no frontend)
     const productIds = items.map((item) => item.productId);
 
     const products = await prisma.product.findMany({
@@ -37,7 +35,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // 🔥 calcula total com base no banco
     const total = items.reduce((acc, item) => {
       const product = products.find(p => p.id === item.productId)!;
       return acc + product.price * item.quantity;
@@ -45,7 +42,7 @@ export async function POST(request: Request) {
 
     const newOrder = await prisma.order.create({
       data: {
-        userId: session.user.id, // 🔥 vem da sessão
+        userId: session.user.id,
         total,
         items: {
           create: items.map((item) => ({

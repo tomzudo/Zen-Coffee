@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { requireAuth } from '@/lib/auth';
 
-// 📦 GET (buscar produto)
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
@@ -32,7 +31,6 @@ export async function GET(
   }
 }
 
-// 📦 PUT (atualizar produto)
 export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
@@ -55,7 +53,7 @@ export async function PUT(
       data: {
         name,
         description,
-        price: Number(price), // 🔥 garante tipo
+        price: Number(price),
         status,
       },
     });
@@ -74,7 +72,6 @@ export async function PUT(
   }
 }
 
-// 📦 DELETE (remover produto)
 export async function DELETE(
   request: Request,
   { params }: { params: { id: string } }
@@ -82,7 +79,6 @@ export async function DELETE(
   try {
     await requireAuth();
 
-    // 🔥 remove itens relacionados
     await prisma.orderItem.deleteMany({
       where: { productId: params.id },
     });

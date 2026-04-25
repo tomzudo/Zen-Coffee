@@ -19,7 +19,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
   }
 
-  // 🔥 remove sessões antigas (opcional, mas profissional)
   await prisma.session.deleteMany({
     where: { userId: user.id },
   });
@@ -27,7 +26,7 @@ export async function POST(req: Request) {
   const session = await prisma.session.create({
     data: {
       userId: user.id,
-      expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24), // 1 dia
+      expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24),
     },
   });
 

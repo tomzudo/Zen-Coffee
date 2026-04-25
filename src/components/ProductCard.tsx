@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 
 interface ProductCardProps {
-  id: string; // 🔥 necessário pra comprar
+  id: string;
   name: string;
   price: number;
   image: string;
@@ -26,7 +26,7 @@ export default function ProductCard({
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include', // 🔐 sessão
+        credentials: 'include',
         body: JSON.stringify({
           items: [
             {

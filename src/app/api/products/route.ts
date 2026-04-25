@@ -18,7 +18,6 @@ function handleError(error: unknown) {
   );
 }
 
-// 📦 CREATE
 export async function POST(request: Request) {
   try {
     await requireAuth();
@@ -51,7 +50,6 @@ export async function POST(request: Request) {
   }
 }
 
-// 📦 READ
 export async function GET() {
   try {
     await requireAuth();
@@ -70,7 +68,6 @@ export async function GET() {
   }
 }
 
-// 📦 UPDATE
 export async function PUT(request: Request) {
   try {
     await requireAuth();
@@ -104,7 +101,6 @@ export async function PUT(request: Request) {
   }
 }
 
-// 📦 DELETE
 export async function DELETE(request: Request) {
   try {
     await requireAuth();
@@ -129,7 +125,6 @@ export async function DELETE(request: Request) {
       return unauthorized();
     }
 
-    // Prisma: registro não encontrado
     if (typeof error === 'object' && error !== null && 'code' in error) {
       const err = error as { code?: string };
 
