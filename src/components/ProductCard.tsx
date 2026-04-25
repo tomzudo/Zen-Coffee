@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
+
 interface ProductCardProps {
   id: string; // 🔥 necessário pra comprar
   name: string;
@@ -53,9 +54,9 @@ export default function ProductCard({
 
   return (
     <div
-      className="group rounded-2xl backdrop-blur-md p-4 transition-all duration-300"
+      className=" group rounded-2x1 backdrop-blur-md p-12 transition-all duration-300"
     >
-      <div className="overflow-hidden rounded-xl">
+      <div className="rounded-xl">
         <img
           src={image}
           alt={name}
@@ -64,22 +65,24 @@ export default function ProductCard({
       </div>
 
       <div className="mt-4">
-        <h3 className="text-lg font-semibold text-black">{name}</h3>
+        <h3 className="text-lg font-normal text-black">{name}</h3>
 
         <p className="text-sm text-black">Zen Coffee</p>
 
-        <div className="mt-2 flex items-center justify-between">
-          <span className="text-xl font-normal text-red-600">
-            R$ {price.toFixed(2)}
-          </span>
 
-          <button
-            onClick={handleBuy}
-            className="rounded-full bg-black/80 px-4 py-2 text-sm text-white hover:bg-black transition"
-          >
-            Comprar
-          </button>
-        </div>
+      <div className="mt-4 flex flex-col items-center">
+        <button
+          onClick={handleBuy}
+          className="w-full max-w-[340px] bg-[#483215]/70 py-3 text-sm text-white hover:bg-[#483215]/50 transition"
+        >
+          Adicionar ao carrinho
+        </button>
+
+        <span className="mt-2 text-lg font-semibold text-red-600 text-4x1 text-center w-full max-w-[220px]">
+          R$ {price.toFixed(2)}
+        </span>
+      </div>
+
       </div>
     </div>
   );
